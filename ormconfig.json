@@ -1,0 +1,14 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5433,
+  "username": "postgres",
+  "password": "tachtach12203",
+  "database": "GRAPHQL_TEST",
+  "synchronize": false,
+  "logging": true,
+  "entities": ["src/database/entities/**/*.ts"],
+  "migrations": ["src/database/migrations/**/*.ts"],
+  "subscribers": ["src/database/subscriber/**/*.ts"],
+  "cli": { "migrationsDir": "src/database/migrations" }
+}

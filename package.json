@@ -19,7 +19,16 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "migration:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -n",
+    "migration:create": "ts-node ./node_modules/.bin/typeorm migration:create -n",
+    "migration:run": "ts-node ./node_modules/.bin/typeorm migration:run",
+    "migration:revert": "ts-node ./node_modules/.bin/typeorm migration:revert",
+    "migration:win:create": "ts-node node_modules\\typeorm\\cli.js migration:create -n",
+    "migration:win:run": "ts-node node_modules\\typeorm\\cli.js migration:run",
+    "migration:win:revert": "ts-node node_modules\\typeorm\\cli.js migration:revert",
+    "migration:win:generate": "ts-node node_modules\\typeorm\\cli.js migration:generate -n",
+    "migration": "ts-node ./node_modules/.bin/typeorm"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
