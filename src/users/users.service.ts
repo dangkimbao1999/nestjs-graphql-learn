@@ -3,7 +3,7 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from '../database/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
@@ -19,6 +19,21 @@ export class UsersService {
 
   async findAll(): Promise<Array<User>> {
     return await this.userRepository.find();
+  }
+
+  async findAndCount(
+    page: number,
+    limit: number,
+    role: string,
+  ): Promise<User[]> {
+    const [list, count] = await this.userRepository.findAndCount({
+      take: limit,
+      skip: (page - 1) * limit,
+      where: {
+        ...(role && { role: role }),
+      },
+    });
+    return list;
   }
 
   async findOne(userId: string): Promise<User> {

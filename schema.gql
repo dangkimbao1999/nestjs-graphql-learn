@@ -37,6 +37,36 @@ type User {
 type Query {
   users: [User!]!
   user(userId: String!): User!
+  queryUser(queryUserInput: QueryUserInput!): [User!]!
+}
+
+input QueryUserInput {
+  """
+  Example field (placeholder)
+  """
+  exampleField: Int
+
+  """
+  first name of the user
+  """
+  firstName: String
+
+  """
+  last name of the user
+  """
+  lastName: String
+
+  """
+  email of the user
+  """
+  email: String
+
+  """
+  role of the user
+  """
+  role: String
+  page: Float!
+  limit: Float!
 }
 
 type Mutation {

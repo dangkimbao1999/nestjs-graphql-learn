@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { User } from '../database/entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { QueryUserInput } from './dto/query-user.input';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -21,6 +22,29 @@ export class UsersResolver {
   @Query(() => User, { name: 'user' })
   findOne(@Args('userId', { type: () => String }) userId: string) {
     return this.usersService.findOne(userId);
+  }
+
+  /*
+  query{
+  queryUser(queryUserInput:{
+    role: "CUSTOMER"
+    page: 1
+    limit: 1
+  }){
+    userId
+    firstName
+    lastName
+    email
+    role
+  }
+}*/
+  @Query(() => [User], { name: 'queryUser' })
+  queryResult(@Args('queryUserInput') queryUserInput: QueryUserInput) {
+    return this.usersService.findAndCount(
+      queryUserInput.page,
+      queryUserInput.limit,
+      queryUserInput.role,
+    );
   }
 
   @Mutation(() => User)
