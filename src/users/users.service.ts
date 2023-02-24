@@ -80,6 +80,7 @@ export class UsersService {
       email: '',
       role: '',
       password: '',
+      todos: [],
     };
   }
 }

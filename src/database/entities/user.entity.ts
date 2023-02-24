@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Todo } from './todo.entity';
 
 @Entity()
 @ObjectType()
@@ -23,4 +24,8 @@ export class User {
   @Column()
   @Field()
   password: string;
+
+  @ManyToOne(() => Todo, (todo) => todo.user)
+  @Field(() => [Todo])
+  todos: Todo[];
 }

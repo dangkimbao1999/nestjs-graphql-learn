@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { TodosModule } from './todos/todos.module';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -28,6 +29,7 @@ dotenv.config();
     }),
     UsersModule,
     AuthModule,
+    TodosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

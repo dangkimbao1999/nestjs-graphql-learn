@@ -2,6 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Todo {
+  """
+  id of the todo
+  """
+  id: String!
+  title: String!
+  content: String!
+  user: User!
+}
+
 type User {
   """
   id of the user
@@ -28,6 +38,7 @@ type User {
   """
   role: String!
   password: String!
+  todos: [Todo!]!
 }
 
 type SigninResponse {
@@ -43,6 +54,7 @@ type Query {
   users: [User!]!
   user(userId: String!): User!
   queryUser(queryUserInput: QueryUserInput!): [User!]!
+  todos: [Todo!]!
 }
 
 input QueryUserInput {
@@ -80,6 +92,7 @@ type Mutation {
   removeUser(userId: String!): User!
   signup(loginUserInput: CreateUserInput!): SignupResponse!
   signin(loginUserInput: SigninInput!): SigninResponse!
+  createTodo(createTodoInput: createTodoInput!): Todo!
 }
 
 input CreateUserInput {
@@ -140,4 +153,16 @@ input UpdateUserInput {
 input SigninInput {
   username: String!
   password: String!
+}
+
+input createTodoInput {
+  """
+  first name of the user
+  """
+  title: String!
+
+  """
+  last name of the user
+  """
+  content: String!
 }
