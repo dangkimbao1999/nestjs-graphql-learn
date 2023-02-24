@@ -4,6 +4,9 @@ import { User } from '../database/entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { QueryUserInput } from './dto/query-user.input';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { CurrentUser } from 'src/decorators/get-current-user.decorator';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -15,7 +18,9 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'users' })
-  findAll() {
+  @UseGuards(JwtAuthGuard)
+  findAll(@CurrentUser() user: User) {
+    console.log(user);
     return this.usersService.findAll();
   }
 

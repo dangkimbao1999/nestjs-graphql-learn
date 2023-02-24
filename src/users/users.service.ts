@@ -44,6 +44,18 @@ export class UsersService {
     return user;
   }
 
+  async findOneByEmail(email: string): Promise<User> {
+    const user = await this.userRepository.findOne({
+      where: {
+        email: email,
+      },
+    });
+    if (!user) {
+      throw new NotFoundException(`User #${email} not found`);
+    }
+    return user;
+  }
+
   async update(
     userId: string,
     updateUserInput: UpdateUserInput,
@@ -67,7 +79,7 @@ export class UsersService {
       lastName: '',
       email: '',
       role: '',
-      exampleField: 0,
+      password: '',
     };
   }
 }

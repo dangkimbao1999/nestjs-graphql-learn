@@ -7,9 +7,6 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => String, { description: 'id of the user' })
   userId: string;
-  @Column('int')
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
   @Column()
   @Field(() => String, { description: 'first name of the user' })
   firstName: string;
@@ -22,4 +19,8 @@ export class User {
   @Column({ nullable: true })
   @Field(() => String, { description: 'role of the user' })
   role: string;
+
+  @Column()
+  @Field()
+  password: string;
 }

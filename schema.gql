@@ -9,11 +9,6 @@ type User {
   userId: String!
 
   """
-  Example field (placeholder)
-  """
-  exampleField: Int!
-
-  """
   first name of the user
   """
   firstName: String!
@@ -32,6 +27,16 @@ type User {
   role of the user
   """
   role: String!
+  password: String!
+}
+
+type SigninResponse {
+  email: String!
+  accessToken: String!
+}
+
+type SignupResponse {
+  email: String!
 }
 
 type Query {
@@ -42,11 +47,6 @@ type Query {
 
 input QueryUserInput {
   """
-  Example field (placeholder)
-  """
-  exampleField: Int
-
-  """
   first name of the user
   """
   firstName: String
@@ -65,6 +65,11 @@ input QueryUserInput {
   role of the user
   """
   role: String
+
+  """
+  password of the user
+  """
+  password: String
   page: Float!
   limit: Float!
 }
@@ -73,14 +78,11 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(userId: String!): User!
+  signup(loginUserInput: CreateUserInput!): SignupResponse!
+  signin(loginUserInput: SigninInput!): SigninResponse!
 }
 
 input CreateUserInput {
-  """
-  Example field (placeholder)
-  """
-  exampleField: Int!
-
   """
   first name of the user
   """
@@ -100,14 +102,14 @@ input CreateUserInput {
   role of the user
   """
   role: String!
+
+  """
+  password of the user
+  """
+  password: String!
 }
 
 input UpdateUserInput {
-  """
-  Example field (placeholder)
-  """
-  exampleField: Int
-
   """
   first name of the user
   """
@@ -127,5 +129,15 @@ input UpdateUserInput {
   role of the user
   """
   role: String
+
+  """
+  password of the user
+  """
+  password: String
   userId: String!
+}
+
+input SigninInput {
+  username: String!
+  password: String!
 }
